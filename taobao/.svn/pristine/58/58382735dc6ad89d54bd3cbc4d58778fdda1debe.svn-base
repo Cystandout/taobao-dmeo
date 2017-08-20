@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>人物介绍</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: "microsoft yahei";
+        }
+        li{
+            list-style: none;
+            float: left;
+        }
+        .person{
+            width: 415px;
+            height: 42px;
+            border: 1px solid #eee;
+            position: relative;
+            background-color: #fff;
+            margin: 100px auto;
+        }
+        .person ul{
+            position: absolute;
+        }
+        .person .cloud{
+            width: 83px;
+            height: 42px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: url("images/top/cloud.gif") no-repeat;
+        }
+        .person li{
+            width: 83px;
+            height: 42px;
+            line-height: 42px;
+            float: left;
+            text-align: center;
+            color: #000;
+            cursor: pointer;
+            font-size:  20px;
+        }
+    </style>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/jquery.color-2.1.2.min.js"></script>
+    <script>
+        $(function(){
+            var leader = 0;
+            var target = 0;
+            var current = 0; // 用于存放当前点击的offsetLeft
+            $(".person ul").on("mouseenter","li",function(){
+                console.log(this.offsetLeft);
+                target = this.offsetLeft;
+                move();
+            }).on("mouseleave","li",function () {
+                // 鼠标离开回到上一个点击的位置
+                target = current;
+                move();
+            }).on("click","li",function () {
+                // 点击的时候获取当前的位置
+                current = this.offsetLeft;
+                move();
+            });
+            // 图片做动画
+            function move(){
+                //if(!$(".cloud").is(":animated")){
+                    $(".cloud").stop(false,true).animate(
+                        {
+                            "left": target
+                        }
+                        ,500);
+                //}
+            }
+
+
+
+
+        });
+
+    </script>
+
+</head>
+<body>
+    <div class="person">
+        <span class="cloud"></span>
+        <ul>
+            <li>谢世勋</li>
+            <li>曾  可</li>
+            <li>卢  渊</li>
+            <li>刘  杰</li>
+            <li>徐杨波</li>
+        </ul>
+    </div>
+</body>
+</html>
